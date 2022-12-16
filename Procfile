@@ -1,0 +1,1 @@
+web: gunicorn USIS_web.wsgi

@@ -1,0 +1,45 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-info bg-info">
+    <div class="container">
+        {% comment %} <div class="">
+           
+            <img src="{% static '/tradebazix-250x250.jpg' %}" alt="" />
+          
+        </div> {% endcomment %}
+
+        {% if user.is_authenticated %}
+
+        <a class="navbar-brand text-white" href="{% url 'store-index' %}">Universal Sales Inventory System</a>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="{% url 'store-index' %}">Dashboard <span
+                            class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="{% url 'user-profile' %}">{{ user.username }}
+                        <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'user-logout' %}">Logout</a>
+                </li>
+            </ul>
+            {% else %}
+            <a class="nav-link text-white"> Universal Sales Inventory System </a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link text-white" href="{% url 'user-register' %}">Register <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{% url 'user-login' %}">Login</a>
+                </li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

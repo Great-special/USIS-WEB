@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+<div>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="card">
+                <div class="card-header">
+                    Order Product
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <input type="text" name="product_name" value="{{product.name }}" list="products" placeholder="search products" class="form-control">
+                        <datalist id="products">
+                            {% for product in products %}
+                                <option value="{{ product.name }}"></option>
+                            {% endfor %}
+                        </datalist>
+
+                        {{form |crispy}}
+                        <input class="btn btn-info btn-block" type="submit" value="Order">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Orders Sold Records
+                </div>
+                <div class="card-body">
+                    <table class="table bg-white">
+                        <thead class="bg-info text-white">
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            {% if order.seller_id == user %}
+                            <tr>
+                                <td>{{ order.product.name }}</td>
+                                <td>{{ order.product.category }}</td>
+                                <td>{{ order.order_quantity }}</td>
+                                <td>{{ order.order_price | intcomma }}</td>
+                                <td>{{ order.total_price | intcomma }}</td>
+
+                            </tr> 
+                            {% endif %}
+                            {% endfor %}
+                    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
