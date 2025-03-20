@@ -21,7 +21,7 @@ Univail Sales Inventory System is a comprehensive Django-based application desig
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/univail-sales-inventory.git
+git clone https://github.com/Great-special/USIS-WEB.git
 cd univail-sales-inventory
 ```
 
